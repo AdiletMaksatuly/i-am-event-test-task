@@ -1,18 +1,19 @@
 import FlightsPage from "./pages/FlightsPage.tsx";
+import "./App.css"
 
 function App() {
 
   return (
-    <>
-        <header>
+    <div className="app">
+        <header className="header">
             <div className="container">
                 <strong>Avia flights</strong>
             </div>
         </header>
-        <main>
+        <main className="content">
             <FlightsPage />
         </main>
-    </>
+    </div>
   )
 }
 

@@ -1,0 +1,37 @@
+.flight {
+    display: flex;
+    justify-content: space-around;
+    column-gap: 40px;
+    align-items: center;
+    padding: 30px 20px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background-color: #ffffff;
+}
+
+.cities {
+    position: relative;
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    font-size: 20px;
+}
+
+.separator {
+    font-weight: 700;
+}
+
+.origin, .destination {
+    font-weight: 700;
+}
+
+.flight-time {
+    display: flex;
+    flex-direction: column;
+}
+
+.highlight {
+    color: rgb(114,132,228);
+    background-color: transparent;
+    cursor: pointer;
+}

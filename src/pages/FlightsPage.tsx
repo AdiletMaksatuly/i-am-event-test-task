@@ -1,5 +1,6 @@
 import FlightsList from "../components/FlightsList/FlightsList.tsx";
 import {Flight} from "../models/flight.interface.ts";
+import styles from "./FlightsPage.module.css";
 
 function FlightsPage() {
     const flights: Flight[] = [
@@ -25,9 +26,11 @@ function FlightsPage() {
 
 
     return (
-        <section className="container">
-            <h1>Flights page</h1>
-            <FlightsList flights={flights} />
+        <section className={styles.flights}>
+            <div className="container">
+                <h1>Flights page</h1>
+                <FlightsList flights={flights} />
+            </div>
         </section>
     );
 }
