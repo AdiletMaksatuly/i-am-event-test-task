@@ -1,29 +1,15 @@
 import FlightsList from "../components/FlightsList/FlightsList.tsx";
 import {Flight} from "../models/flight.interface.ts";
 import styles from "./FlightsPage.module.css";
+import {useEffect, useState} from "react";
+import {fetchFlights} from "../api/flights.api.ts";
 
 function FlightsPage() {
-    const flights: Flight[] = [
-        {
-            id: 1,
-            origin: "Almaty",
-            destination: "Moscow",
-            price: 500,
-            stops: 0,
-            layovers: [],
-            totalFlightTime: "4h",
-        },
-        {
-            id: 2,
-            origin: "Almaty",
-            destination: "Astana",
-            price: 100,
-            stops: 0,
-            layovers: [],
-            totalFlightTime: "2h",
-        },
-    ];
+    const [flights, setFlights] = useState<Flight[]>([]);
 
+    useEffect(() => {
+       fetchFlights().then((flights: Flight[]) => setFlights(flights));
+    }, []);
 
     return (
         <section className={styles.flights}>
