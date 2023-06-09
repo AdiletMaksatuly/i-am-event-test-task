@@ -6,6 +6,7 @@ import {fetchFlights} from "../api/flights.api.ts";
 import Select from "react-select";
 import {GroupedOption, SortOption} from "../models/sort.model.ts";
 import {sortOptions} from "../consts/sort.const.ts";
+import SearchInput from "../components/SearchInput/SearchInput.tsx";
 
 const defaultSortOption: SortOption = {
     label: 'Не выбрано',
@@ -19,7 +20,9 @@ function FlightsPage() {
 
     const [sortOption, setSortOption] = useState<SortOption>(defaultSortOption);
 
-    const filteredFlights = useMemo<Flight[]>(() => {
+    const [searchQuery, setSearchQuery] = useState<string>('');
+
+    const sortedFlights = useMemo<Flight[]>(() => {
         if (sortOption.value === '') return flights;
 
         switch (sortOption.value) {
@@ -34,6 +37,16 @@ function FlightsPage() {
         }
     }, [flights, sortOption]);
 
+    const filteredFlights = useMemo<Flight[]>(() => {
+        return sortedFlights.filter((flight) => {
+            const loweredSearchQuery = searchQuery.toLowerCase();
+            const loweredFlightOrigin = flight.origin.toLowerCase();
+            const loweredFlightDest = flight.destination.toLowerCase();
+
+            return loweredFlightOrigin.includes(loweredSearchQuery) || loweredFlightDest.includes(loweredSearchQuery);
+        });
+    }, [searchQuery, sortedFlights]);
+
 
     useEffect(() => {
         fetchFlights().then((flights: Flight[]) => setFlights(flights));
@@ -43,12 +56,21 @@ function FlightsPage() {
         <section className={styles.flights}>
             <div className="container">
                 <h1>Flights page</h1>
+
+                <h2>Поиск:</h2>
+                <SearchInput
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder={'Введите город отправки или прибытия'}
+                />
+
+                <h2>Сортировка:</h2>
                 <Select
                     <SortOption, false, GroupedOption>
                     isSearchable={false}
                     value={sortOption}
                     onChange={(sortType) => setSortOption(sortType ?? defaultSortOption)}
                     options={selectOptions}
+                    className={styles.sort}
                 />
                 <FlightsList flights={filteredFlights}/>
             </div>
