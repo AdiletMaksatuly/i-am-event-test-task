@@ -1,4 +1,4 @@
-import {GroupedOption, PriceOption, StopsOption} from "../models/sort.model.ts";
+import {GroupedOption, PriceOption, SortOption, StopsOption} from "../models/sort.model.ts";
 
 
 export const priceOptions: PriceOption[] = [
@@ -32,4 +32,9 @@ export const sortOptions: GroupedOption[] = [
         label: "Кол. пересадок",
         options: stopsOptions
     },
-]
+];
+
+export const defaultSortOption: SortOption = {
+    label: 'Не выбрано',
+    value: '',
+}

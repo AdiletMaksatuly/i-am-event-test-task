@@ -5,21 +5,20 @@ import {useEffect, useMemo, useState} from "react";
 import {fetchFlights} from "../api/flights.api.ts";
 import Select from "react-select";
 import {GroupedOption, SortOption} from "../models/sort.model.ts";
-import {sortOptions} from "../consts/sort.const.ts";
+import {defaultSortOption, sortOptions} from "../consts/sort.const.ts";
 import SearchInput from "../components/SearchInput/SearchInput.tsx";
 import FlightsFilter from "../components/FlightsFilter/FlightsFilter.tsx";
 import {FlightsFilterType} from "../components/FlightsFilter/filter.type.ts";
 import {STOPS_VALUES} from "../components/FlightsFilter/filter.const.ts";
 
-const defaultSortOption: SortOption = {
-    label: 'Не выбрано',
-    value: '',
-}
-
 const selectOptions: Array<GroupedOption | SortOption> = [defaultSortOption, ...sortOptions];
 
 function FlightsPage() {
     const [flights, setFlights] = useState<Flight[]>([]);
+
+    const [sortOption, setSortOption] = useState<SortOption>(defaultSortOption);
+
+    const [searchQuery, setSearchQuery] = useState<string>('');
 
     const prices = useMemo(() => {
         const flightsPrices = flights.map((flight) => flight.price);
@@ -55,10 +54,6 @@ function FlightsPage() {
         stops: STOPS_VALUES.any,
     });
 
-    const [sortOption, setSortOption] = useState<SortOption>(defaultSortOption);
-
-    const [searchQuery, setSearchQuery] = useState<string>('');
-
     const sortedFlights = useMemo<Flight[]>(() => {
         if (sortOption.value === '') return flights;
 
@@ -89,8 +84,6 @@ function FlightsPage() {
             const normalizedFlightTime = Number(flight.totalFlightTime.replace("h", ''));
             if (normalizedFlightTime < filterOptions.flightTime.min || normalizedFlightTime > filterOptions.flightTime.max) return;
 
-            // if (filterOptions.stops !== "any" && (Number(filterOptions.stops) !== flight.stops)) return;
-            console.log(filterOptions.stops, flight.stops)
             switch (filterOptions.stops) {
                 case STOPS_VALUES.any:
                     return true;

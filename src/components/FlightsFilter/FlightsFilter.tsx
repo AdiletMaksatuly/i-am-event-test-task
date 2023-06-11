@@ -36,8 +36,6 @@ function FlightsFilter({ filterOptions, onFilter }: FlightsFilterProps) {
         });
     };
 
-    console.log(filterOptions)
-
     const changeHandler = (newFilterOptions: FlightsFilterType) => {
         onFilter(newFilterOptions);
     }

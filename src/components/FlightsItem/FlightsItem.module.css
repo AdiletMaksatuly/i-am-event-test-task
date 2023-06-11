@@ -10,13 +10,13 @@
 }
 
 @media (prefers-color-scheme: light) {
-    .flightt {
+    .flight {
         background-color: #ffffff;
     }
 }
 
 @media (prefers-color-scheme: dark) {
-    .flightt {
+    .flight {
         background-color: #1a1a1a;
     }
 }
