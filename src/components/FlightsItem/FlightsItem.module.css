@@ -7,7 +7,18 @@
     padding: 30px 20px;
     border: 1px solid #ccc;
     border-radius: 20px;
-    background-color: #ffffff;
+}
+
+@media (prefers-color-scheme: light) {
+    .flightt {
+        background-color: #ffffff;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .flightt {
+        background-color: #1a1a1a;
+    }
 }
 
 .cities {

@@ -1,0 +1,11 @@
+.filters {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    column-gap: 20px;
+    flex-wrap: wrap;
+}
+
+.apply {
+    margin-top: 10px;
+}
